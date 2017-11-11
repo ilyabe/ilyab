@@ -57,35 +57,48 @@
 (defn headshot
   "My main image."
   []
-  [:img.headshot {:src "img/sargon.jpg" :width 100 :height 100}])
+  [:div.row.justify-content-center
+   [:div.col-4
+    [:img.rounded.mx-auto.d-block.headshot
+     {:src "img/sargon.jpg"
+      :alt "Ilya Bernshteyn"}]]])
 
 (defn my-name
   "My name, of course."
   []
   (let [nm (rf/subscribe [:name])]
-    [:h1 @nm]))
+    [:div.row.justify-content-center
+     [:div.col-4
+      [:h1 @nm]]]))
 
 (defn contact-form
-  "The form for submitting a comment."
+  "The form for submitting a message."
   []
   [:form.contact-form {:action "/v1/contact", :method "post"}
-    [:label "Subject: "] [:input {:type "text"
-                                  :name "subject"
-                                  :on-change #(rf/dispatch [:subj-change (-> % .-target .-value)])}]
-    [:label "Message: "] [:textarea {:rows "4"
-                                     :cols "50"
-                                     :name "message"
-                                     :on-change #(rf/dispatch [:msg-change (-> % .-target .-value)])}]
-    [:input {:type "button",
-             :value "Send"
-             :on-click #(rf/dispatch [:contact-submit])
-            }]])
+   [:div.form-group
+    [:label {:for "subject"} "Subject"]
+    [:input#subject.form-control
+     {:type "text"
+      :name "subject"
+      :placeholder "Subject"
+      :on-change #(rf/dispatch [:subj-change (-> % .-target .-value)])}]]
+   [:div.form-group
+    [:label {:for "message"} "Message"]
+    [:textarea#message.form-control
+     {:rows "4"
+      :placeholder "Message"
+      :name "message"
+      :on-change #(rf/dispatch [:msg-change (-> % .-target .-value)])}]]
+   [:button.btn.btn-primary
+    {:type "button"
+     :on-click #(rf/dispatch [:contact-submit])}
+    "Send"]])
 
 (defn home-page
   []
   [:div.container
-    [my-name]
     [headshot]
+    [my-name]
     [subtitle]
     [contact-form]])
 

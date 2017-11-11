@@ -23,7 +23,7 @@
                  [org.clojure/tools.logging "0.4.0"]
                  [org.clojure/tools.reader "1.1.0"]
                  [org.webjars.bower/tether "1.4.0"]
-                 [org.webjars/bootstrap "4.0.0-alpha.5"]
+                 [org.webjars/bootstrap "4.0.0-beta.2"]
                  [org.webjars/font-awesome "4.7.0"]
                  [re-frame "0.10.2"]
                  [reagent "0.7.0"]
@@ -53,7 +53,7 @@
    :nrepl-port 7002
    :css-dirs ["resources/public/css"]
    :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-  
+
 
   :profiles
   {:uberjar {:omit-source true
@@ -69,8 +69,8 @@
                  :closure-warnings
                  {:externs-validation :off :non-standard-jsdoc :off}
                  :externs ["react/externs/react.js"]}}}}
-             
-             
+
+
              :aot :all
              :uberjar-name "ilyab.jar"
              :source-paths ["env/prod/clj"]
@@ -104,9 +104,9 @@
                       :source-map true
                       :optimizations :none
                       :pretty-print true}}}}
-                  
-                  
-                  
+
+
+
                   :doo {:build "test"}
                   :source-paths ["env/dev/clj"]
                   :resource-paths ["env/dev/resources"]
@@ -123,7 +123,7 @@
                       :main "ilyab.doo-runner"
                       :optimizations :whitespace
                       :pretty-print true}}}}
-                  
+
                   }
    :profiles/dev {}
    :profiles/test {}})
