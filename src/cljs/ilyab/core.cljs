@@ -40,7 +40,6 @@
     [:div.col-md-12
      [:img {:src (str js/context "/img/warning_clojure.png")}]]]])
 
-;;<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
 (defn subtitle
   "The blurb below my name."
   []
@@ -56,13 +55,6 @@
      ", and "
      [:a {:href "http://getbootstrap.com/", :target "_blank"} "Bootstrap"]
      "."]]])
-  ;;[:p "Website created with "
-  ;;  [:a {:href "https://clojure.org"} "Clojure"]
-  ;;  ", "
-  ;;  [:a {:href "https://clojurescript.org"} "ClojureScript"]
-  ;;  ", and "
-  ;;  [:a {:href "https://github.com/Day8/re-frame"} "re-frame"]
-  ;;  "."])
 
 (defn headshot
   "My main image."
