@@ -10,25 +10,49 @@
             [ilyab.events])
   (:import goog.History))
 
-(defn nav-link [uri title page collapsed?]
+;;(defn nav-link [uri title page collapsed?]
+;;  (let [selected-page (rf/subscribe [:page])]
+;;    [:li.nav-item
+;;     {:class (when (= page @selected-page) "active")}
+;;     [:a.nav-link
+;;      {:href uri
+;;       :on-click #(reset! collapsed? true)} title]]))
+
+(defn nav-link [uri title page]
   (let [selected-page (rf/subscribe [:page])]
     [:li.nav-item
      {:class (when (= page @selected-page) "active")}
      [:a.nav-link
-      {:href uri
-       :on-click #(reset! collapsed? true)} title]]))
+      {:href uri} title]]))
 
-(defn navbar []
-  (r/with-let [collapsed? (r/atom true)]
-    [:nav.navbar.navbar-dark.bg-primary
-     [:button.navbar-toggler.hidden-sm-up
-      {:on-click #(swap! collapsed? not)} "☰"]
-     [:div.collapse.navbar-toggleable-xs
-      (when-not @collapsed? {:class "in"})
-      [:a.navbar-brand {:href "#/"} "ilyab"]
-      [:ul.nav.navbar-nav
-       [nav-link "#/" "Home" :home collapsed?]
-       [nav-link "#/about" "About" :about collapsed?]]]]))
+;;(defn navbar []
+;;  (r/with-let [collapsed? (r/atom true)]
+;;    [:nav.navbar.navbar-dark.bg-primary
+;;     [:button.navbar-toggler.hidden-sm-up
+;;      {:on-click #(swap! collapsed? not)} "☰"]
+;;     [:div.collapse.navbar-toggleable-xs
+;;      (when-not @collapsed? {:class "in"})
+;;      [:a.navbar-brand {:href "#/"} "ilyab"]
+;;      [:ul.nav.navbar-nav
+;;       [nav-link "#/" "Home" :home collapsed?]
+;;       [nav-link "#/about" "About" :about collapsed?]]]]))
+
+(defn navbar
+  []
+  [:nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+   [:a.navbar-brand {:href "#/"} "~/ilya"]
+   [:button.navbar-toggler
+    {:type "button"
+     :data-toggle "collapse"
+     :data-target "#navbarSupportedContent"
+     :aria-controls "navbarSupportedContent"
+     :aria-expanded "false"
+     :aria-label "Toggle navigation"}
+    [:span.navbar-toggler-icon]]
+   [:div#navbarSupportedContent.collapse.navbar-collapse
+    [:ul.navbar-nav.mr-auto
+     [nav-link "#/" "Home" :home false]
+     [nav-link "#/about" "About" :about false]]]])
 
 (defn about-page []
   [:div.container
