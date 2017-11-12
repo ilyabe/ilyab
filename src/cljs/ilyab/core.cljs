@@ -57,9 +57,9 @@
 (defn headshot
   "My main image."
   []
-  [:div.row.justify-content-center
-   [:div.col-4
-    [:img.rounded.mx-auto.d-block.headshot
+  [:div.row
+   [:div.col.text-center
+    [:img.rounded.headshot
      {:src "img/sargon.jpg"
       :alt "Ilya Bernshteyn"}]]])
 
@@ -68,8 +68,8 @@
   []
   (let [nm (rf/subscribe [:name])]
     [:div.row.justify-content-center
-     [:div.col-4
-      [:h1 @nm]]]))
+     [:div.col.text-center
+      [:h1.name-heading @nm]]]))
 
 (defn contact-form
   "The form for submitting a message."
