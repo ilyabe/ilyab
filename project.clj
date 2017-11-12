@@ -1,7 +1,7 @@
-(defproject ilyab "0.1.0-SNAPSHOT"
+(defproject ilyab "0.1.0"
 
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Ilya's home on the web"
+  :url "http://ilyab.com"
 
   :dependencies [[clj-time "0.14.0"]
                  [cljs-ajax "0.7.3"]
