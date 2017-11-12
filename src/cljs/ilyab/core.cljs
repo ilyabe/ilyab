@@ -10,38 +10,18 @@
             [ilyab.events])
   (:import goog.History))
 
-;;(defn nav-link [uri title page collapsed?]
-;;  (let [selected-page (rf/subscribe [:page])]
-;;    [:li.nav-item
-;;     {:class (when (= page @selected-page) "active")}
-;;     [:a.nav-link
-;;      {:href uri
-;;       :on-click #(reset! collapsed? true)} title]]))
-
-(defn nav-link [uri title page]
+(defn nav-link
+  [uri title page]
   (let [selected-page (rf/subscribe [:page])]
     [:li.nav-item
      {:class (when (= page @selected-page) "active")}
-     [:a.nav-link
-      {:href uri} title]]))
-
-;;(defn navbar []
-;;  (r/with-let [collapsed? (r/atom true)]
-;;    [:nav.navbar.navbar-dark.bg-primary
-;;     [:button.navbar-toggler.hidden-sm-up
-;;      {:on-click #(swap! collapsed? not)} "☰"]
-;;     [:div.collapse.navbar-toggleable-xs
-;;      (when-not @collapsed? {:class "in"})
-;;      [:a.navbar-brand {:href "#/"} "ilyab"]
-;;      [:ul.nav.navbar-nav
-;;       [nav-link "#/" "Home" :home collapsed?]
-;;       [nav-link "#/about" "About" :about collapsed?]]]]))
+     [:a.nav-link {:href uri} title]]))
 
 (defn navbar
   []
   [:nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
    [:a.navbar-brand {:href "#/"} "~/ilya"]
-   [:button.navbar-toggler
+    [:button.navbar-toggler
     {:type "button"
      :data-toggle "collapse"
      :data-target "#navbarSupportedContent"
@@ -51,21 +31,14 @@
     [:span.navbar-toggler-icon]]
    [:div#navbarSupportedContent.collapse.navbar-collapse
     [:ul.navbar-nav.mr-auto
-     [nav-link "#/" "Home" :home false]
-     [nav-link "#/about" "About" :about false]]]])
+     [nav-link "#/" "Home" :home]
+     [nav-link "#/about" "About" :about]]]])
 
 (defn about-page []
   [:div.container
    [:div.row
     [:div.col-md-12
      [:img {:src (str js/context "/img/warning_clojure.png")}]]]])
-
-;;(defn home-page []
-;;  [:div.container
-;;   (when-let [docs @(rf/subscribe [:docs])]
-;;     [:div.row>div.col-sm-12
-;;      [:div {:dangerouslySetInnerHTML
-;;             {:__html (md->html docs)}}]])])
 
 (defn subtitle
   "The blurb below my name."
