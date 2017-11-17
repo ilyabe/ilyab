@@ -81,7 +81,7 @@
   :contact-error
   (fn [db [_ resp]]
     ;; TODO handle error
-    (.log js/console "Got error")
+    (.log js/console (str "Got error: " resp))
     db))
 
 ;; Handles the event fired when the subject on the contact form changes
