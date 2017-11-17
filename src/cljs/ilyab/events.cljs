@@ -32,6 +32,31 @@
   (fn [db _]
     (:docs db)))
 
+(reg-sub
+  :contact-result
+  (fn [db _]
+    (:contact-result db)))
+
+;; Subscribe to changes in the subject line of the contact form
+(reg-sub
+  :subject
+  (fn [db]
+    (:subject db)))
+
+;; Subscribe to changes in the message line of the contact form
+(reg-sub
+  :message
+  (fn [db]
+    (:message db)))
+
+;; Subscribe to changes in my name
+(reg-sub
+ :name
+ (fn [db]
+   (:name db)))
+
+;;;;; event handlers ;;;;;
+
 ;; Handles the event fired when the contact form is submitted
 (reg-event-db
   :contact-submit
@@ -39,17 +64,17 @@
     (.log js/console (:subject db) (:message db))
     (POST "/v1/contact"
       {:params (select-keys db [:subject :message])
-       :handler #(dispatch [:contact-response %1])
+       :handler #(dispatch [:contact-success %1])
        :error-handler #(dispatch [:contact-error %1])})
     db))
 
 ;; Handles successful responses from submitting the contact form
 (reg-event-db
-  :contact-response
+  :contact-success
   (fn [db [_ resp]]
     ;; TODO handle success
-    (.log js/console resp)
-    db))
+    (.log js/console (str "contact-success: " resp))
+    (assoc db :contact-result "Message sent. Thanks! :-)")))
 
 ;; Handles successful error responses from submitting the contact form
 (reg-event-db
@@ -71,21 +96,3 @@
   (fn [db [_ s]]
     (.log js/console s)
     (assoc db :message s)))
-
-;; Subscribe to changes in the subject line of the contact form
-(reg-sub
-  ::subject
-  (fn [db]
-    (:subject db)))
-
-;; Subscribe to changes in the message line of the contact form
-(reg-sub
-  ::message
-  (fn [db]
-    (:message db)))
-
-;; Subscribe to changes in my name
-(reg-sub
- :name
- (fn [db]
-   (:name db)))
