@@ -76,7 +76,8 @@
 (defn contact-form
   "The form for submitting a message."
   []
-  (let [c (rf/subscribe [:contact])]
+  (let [c (rf/subscribe [:contact])
+        subj (rf/subscribe [:subject])]
     (if (= :open (:status @c))
       [:form.contact-form {:action "/v1/contact", :method "post"}
        [:div.form-group
@@ -85,6 +86,7 @@
          {:type "text"
           :name "subject"
           :placeholder "Subject"
+          :value @subj
           :on-change #(rf/dispatch [:subj-change (-> % .-target .-value)])}]]
        [:div.form-group
         [:label {:for "message"} "Message"]
@@ -102,15 +104,17 @@
   "The results of submitting the contact form."
   []
   (let [c (rf/subscribe [:contact])]
-    (if-let [msg (:msg @c)]
-      (if (= :ok (:status msg))
-        [:div.alert.alert-success {:role "alert"} msg]
-        [:div.alert.alert-danger {:role "alert"} msg]))))
+    (case (:status @c)
+      :sent [:div.alert.alert-success {:role "alert"} (:msg @c)]
+      :error [:div.alert.alert-danger {:role "alert"} (:msg @c)
+              " "
+              [:a.badge.badge-primary.try-btn {:href "#", :on-click #(rf/dispatch [:contact-again])} "Try again?"]]
+      nil)))
 
 (defn home-page
   []
   [:div.container
-    [headshot]
+    ;;[headshot]
     [my-name]
     [subtitle]
     [contact-form]

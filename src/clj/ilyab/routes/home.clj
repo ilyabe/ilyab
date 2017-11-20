@@ -22,5 +22,5 @@
       (response/bad-request "Missing subject or body")
       (let [res (email/send-msg subject message)]
         (if (= "OK" (:status res))
-          (response/ok (merge res {:subject subject, :message message}))
+          (response/internal-server-error res) ;;(response/ok (merge res {:subject subject, :message message}))
           (response/internal-server-error res))))))

@@ -96,3 +96,10 @@
   (fn [db [_ s]]
     (.log js/console s)
     (assoc db :message s)))
+
+;; Handles the event fired when the user clicks to retry the contact form
+(reg-event-db
+  :contact-again
+  (fn [db [_ _]]
+    (.log js/console "Trying again")
+    (update db :contact #(assoc % :status :open))))
