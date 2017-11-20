@@ -76,8 +76,8 @@
 (defn contact-form
   "The form for submitting a message."
   []
-  (let [msg (rf/subscribe [:contact-result])]
-    (if-not @msg
+  (let [c (rf/subscribe [:contact])]
+    (if (= :open (:status @c))
       [:form.contact-form {:action "/v1/contact", :method "post"}
        [:div.form-group
         [:label {:for "subject"} "Subject"]
@@ -101,9 +101,11 @@
 (defn contact-result
   "The results of submitting the contact form."
   []
-  (let [msg (rf/subscribe [:contact-result])]
-    (if @msg
-      [:div.alert.alert-success {:role "alert"} @msg])))
+  (let [c (rf/subscribe [:contact])]
+    (if-let [msg (:msg @c)]
+      (if (= :ok (:status msg))
+        [:div.alert.alert-success {:role "alert"} msg]
+        [:div.alert.alert-danger {:role "alert"} msg]))))
 
 (defn home-page
   []

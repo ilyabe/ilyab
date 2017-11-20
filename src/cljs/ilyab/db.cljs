@@ -2,4 +2,5 @@
 
 (def default-db
   {:page :home
-   :name "Ilya Bernshteyn"})
+   :name "Ilya Bernshteyn"
+   :contact {:status :open}})

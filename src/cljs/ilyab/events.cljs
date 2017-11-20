@@ -33,9 +33,9 @@
     (:docs db)))
 
 (reg-sub
-  :contact-result
+  :contact
   (fn [db _]
-    (:contact-result db)))
+    (:contact db)))
 
 ;; Subscribe to changes in the subject line of the contact form
 (reg-sub
@@ -74,7 +74,7 @@
   (fn [db [_ resp]]
     ;; TODO handle success
     (.log js/console (str "contact-success: " resp))
-    (assoc db :contact-result "Message sent. Thanks! :-)")))
+    (update db :contact #(assoc % :status :sent :msg "Message sent. Thanks! :-)"))))
 
 ;; Handles successful error responses from submitting the contact form
 (reg-event-db
@@ -82,7 +82,7 @@
   (fn [db [_ resp]]
     ;; TODO handle error
     (.log js/console (str "Got error: " resp))
-    db))
+    (update db :contact #(assoc % :status :error :msg "Oops! Something went wrong :-("))))
 
 ;; Handles the event fired when the subject on the contact form changes
 (reg-event-db
