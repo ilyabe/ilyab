@@ -77,7 +77,8 @@
   "The form for submitting a message."
   []
   (let [c (rf/subscribe [:contact])
-        subj (rf/subscribe [:subject])]
+        subj (rf/subscribe [:subject])
+        msg (rf/subscribe [:message])]
     (if (= :open (:status @c))
       [:form.contact-form {:action "/v1/contact", :method "post"}
        [:div.form-group
@@ -92,8 +93,9 @@
         [:label {:for "message"} "Message"]
         [:textarea#message.form-control
          {:rows "4"
-          :placeholder "Message"
           :name "message"
+          :placeholder "Message"
+          :value @msg
           :on-change #(rf/dispatch [:msg-change (-> % .-target .-value)])}]]
        [:button.btn.btn-primary
         {:type "button"
