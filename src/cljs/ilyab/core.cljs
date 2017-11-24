@@ -7,7 +7,8 @@
             [markdown.core :refer [md->html]]
             [ajax.core :refer [GET POST]]
             [ilyab.ajax :refer [load-interceptors!]]
-            [ilyab.events])
+            [ilyab.events]
+            [ilyab.subs])
   (:import goog.History))
 
 (defn nav-link
@@ -107,7 +108,8 @@
   []
   (let [c (rf/subscribe [:contact])]
     (case (:status @c)
-      :sent [:div.alert.alert-success {:role "alert"} (:msg @c)]
+      :sent [:div.alert.alert-success {:role "alert"} (:msg @c)
+             [:a.badge.badge-primary.try-btn {:href "#", :on-click #(rf/dispatch [:contact-again :clear])} "Send another?"]]
       :error [:div.alert.alert-danger {:role "alert"} (:msg @c)
               " "
               [:a.badge.badge-primary.try-btn {:href "#", :on-click #(rf/dispatch [:contact-again])} "Try again?"]]
@@ -116,7 +118,7 @@
 (defn home-page
   []
   [:div.container
-    ;;[headshot]
+    [headshot]
     [my-name]
     [subtitle]
     [contact-form]
