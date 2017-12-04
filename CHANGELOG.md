@@ -6,7 +6,7 @@
 * **Add** - email the data submitted via `POST /v1/contact`
 
 ```clojure
-[ilyab "0.1.0"]
+[ilyab "0.2.0"]
 ```
 
 
