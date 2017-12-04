@@ -57,6 +57,18 @@
      [:a {:href "http://getbootstrap.com/", :target "_blank"} "Bootstrap"]
      "."]]])
 
+(defn icons
+  "The social icons."
+  []
+  [:div.row
+   [:div.col.text-center
+    [:a {:href "https://github.com/ilyabe", :target "_blank"}
+     [:i.fa.fa-github.social-icons {:aria-hidden "true"}]]]
+    [:div.col.text-center
+     [:a {:href "https://www.linkedin.com/in/ilya-bernshteyn-01b2317", :target "_blank"}
+      [:i.fa.fa-linkedin-square.social-icons {:aria-hidden "true"}]]
+      ]])
+
 (defn headshot
   "My main image."
   []
@@ -121,6 +133,7 @@
     [headshot]
     [my-name]
     [subtitle]
+    [icons]
     [contact-form]
     [contact-result]])
 
