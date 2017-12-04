@@ -7,7 +7,8 @@
             [markdown.core :refer [md->html]]
             [ajax.core :refer [GET POST]]
             [ilyab.ajax :refer [load-interceptors!]]
-            [ilyab.events])
+            [ilyab.events]
+            [ilyab.subs])
   (:import goog.History))
 
 (defn nav-link
@@ -76,25 +77,43 @@
 (defn contact-form
   "The form for submitting a message."
   []
-  [:form.contact-form {:action "/v1/contact", :method "post"}
-   [:div.form-group
-    [:label {:for "subject"} "Subject"]
-    [:input#subject.form-control
-     {:type "text"
-      :name "subject"
-      :placeholder "Subject"
-      :on-change #(rf/dispatch [:subj-change (-> % .-target .-value)])}]]
-   [:div.form-group
-    [:label {:for "message"} "Message"]
-    [:textarea#message.form-control
-     {:rows "4"
-      :placeholder "Message"
-      :name "message"
-      :on-change #(rf/dispatch [:msg-change (-> % .-target .-value)])}]]
-   [:button.btn.btn-primary
-    {:type "button"
-     :on-click #(rf/dispatch [:contact-submit])}
-    "Send"]])
+  (let [c (rf/subscribe [:contact])
+        subj (rf/subscribe [:subject])
+        msg (rf/subscribe [:message])]
+    (if (= :open (:status @c))
+      [:form.contact-form {:action "/v1/contact", :method "post"}
+       [:div.form-group
+        [:label {:for "subject"} "Subject"]
+        [:input#subject.form-control
+         {:type "text"
+          :name "subject"
+          :placeholder "Subject"
+          :value @subj
+          :on-change #(rf/dispatch [:subj-change (-> % .-target .-value)])}]]
+       [:div.form-group
+        [:label {:for "message"} "Message"]
+        [:textarea#message.form-control
+         {:rows "4"
+          :name "message"
+          :placeholder "Message"
+          :value @msg
+          :on-change #(rf/dispatch [:msg-change (-> % .-target .-value)])}]]
+       [:button.btn.btn-primary
+        {:type "button"
+         :on-click #(rf/dispatch [:contact-submit])}
+        "Send"]])))
+
+(defn contact-result
+  "The results of submitting the contact form."
+  []
+  (let [c (rf/subscribe [:contact])]
+    (case (:status @c)
+      :sent [:div.alert.alert-success {:role "alert"} (:msg @c)
+             [:a.badge.badge-primary.try-btn {:href "#", :on-click #(rf/dispatch [:contact-again :clear])} "Send another?"]]
+      :error [:div.alert.alert-danger {:role "alert"} (:msg @c)
+              " "
+              [:a.badge.badge-primary.try-btn {:href "#", :on-click #(rf/dispatch [:contact-again])} "Try again?"]]
+      nil)))
 
 (defn home-page
   []
@@ -102,7 +121,8 @@
     [headshot]
     [my-name]
     [subtitle]
-    [contact-form]])
+    [contact-form]
+    [contact-result]])
 
 (def pages
   {:home #'home-page

@@ -31,6 +31,18 @@ To compile and watch the ClojureScript, run:
 $ lein figwheel
 ```
 
+## Deployment
+
+The app runs on Heroku and can be deployed like this:
+
+```bash
+# deploy the master branch
+git push heroku master
+
+# deploy a feature branch (replace feature-branch with your branch)
+git push heroku feature-branch:master
+```
+
 ## License
 
 Copyright © 2017 Ilya Bernshteyn

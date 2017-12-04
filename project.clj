@@ -1,4 +1,4 @@
-(defproject ilyab "0.1.0"
+(defproject ilyab "0.2.0"
 
   :description "Ilya's home on the web"
   :url "http://ilyab.com"
@@ -32,7 +32,9 @@
                  [ring/ring-core "1.6.3"]
                  [ring/ring-defaults "0.3.1"]
                  [secretary "1.2.3"]
-                 [selmer "1.11.2"]]
+                 [selmer "1.11.2"]
+                 ;; Internet email library for Clojure
+                 [com.draines/postal "2.0.2"]]
 
   :min-lein-version "2.0.0"
 

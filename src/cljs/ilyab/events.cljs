@@ -1,4 +1,5 @@
 (ns ilyab.events
+  "The event dispatchers and handlers for the app."
   (:require [ajax.core :refer [POST]]
             [ilyab.db :as db]
             [re-frame.core :refer [dispatch reg-event-db reg-sub]]))
@@ -20,17 +21,7 @@
   (fn [db [_ docs]]
     (assoc db :docs docs)))
 
-;;;;; subscriptions ;;;;;
-
-(reg-sub
-  :page
-  (fn [db _]
-    (:page db)))
-
-(reg-sub
-  :docs
-  (fn [db _]
-    (:docs db)))
+;;;;; event handlers ;;;;;
 
 ;; Handles the event fired when the contact form is submitted
 (reg-event-db
@@ -39,25 +30,23 @@
     (.log js/console (:subject db) (:message db))
     (POST "/v1/contact"
       {:params (select-keys db [:subject :message])
-       :handler #(dispatch [:contact-response %1])
+       :handler #(dispatch [:contact-success %1])
        :error-handler #(dispatch [:contact-error %1])})
     db))
 
 ;; Handles successful responses from submitting the contact form
 (reg-event-db
-  :contact-response
+  :contact-success
   (fn [db [_ resp]]
-    ;; TODO handle success
-    (.log js/console resp)
-    db))
+    (.log js/console (str "contact-success: " resp))
+    (update db :contact #(assoc % :status :sent :msg "Message sent. Thanks! :-)"))))
 
 ;; Handles successful error responses from submitting the contact form
 (reg-event-db
   :contact-error
   (fn [db [_ resp]]
-    ;; TODO handle error
-    (.log js/console "Got error")
-    db))
+    (.log js/console (str "Got error: " resp))
+    (update db :contact #(assoc % :status :error :msg "Oops! Something went wrong :-("))))
 
 ;; Handles the event fired when the subject on the contact form changes
 (reg-event-db
@@ -72,20 +61,12 @@
     (.log js/console s)
     (assoc db :message s)))
 
-;; Subscribe to changes in the subject line of the contact form
-(reg-sub
-  ::subject
-  (fn [db]
-    (:subject db)))
-
-;; Subscribe to changes in the message line of the contact form
-(reg-sub
-  ::message
-  (fn [db]
-    (:message db)))
-
-;; Subscribe to changes in my name
-(reg-sub
- :name
- (fn [db]
-   (:name db)))
+;; Handles the event fired when the user clicks to retry the contact form
+(reg-event-db
+  :contact-again
+  (fn [db [_ clr]]
+    (let [clear? (= :clear clr)]
+      (-> db
+          (update :contact #(assoc % :status :open))
+          (update :subject #(if clear? nil (:subject db)))
+          (update :message #(if clear? nil (:message db)))))))
