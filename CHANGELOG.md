@@ -3,7 +3,7 @@
 > This release adds the GitHub and LinkedIn icons and moves the subtitle to the
 > footer.
 
-* **Add** - added GitHub and LinkedIn icons
+* **Add** - added GitHub, LinkedIn, and source icons
 * **Update** - moved the subtitle to the footer
 
 ```clojure
