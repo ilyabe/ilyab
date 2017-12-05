@@ -41,7 +41,7 @@
     [:div.col-md-12
      [:img {:src (str js/context "/img/warning_clojure.png")}]]]])
 
-(defn subtitle
+(defn footer
   "The blurb below my name."
   []
   [:div.row
@@ -135,7 +135,7 @@
     [icons]
     [contact-form]
     [contact-result]
-    [subtitle]])
+    [footer]])
 
 (def pages
   {:home #'home-page
