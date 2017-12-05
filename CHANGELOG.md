@@ -1,3 +1,15 @@
+## v0.3.0 / 2017 Dec 5
+
+> This release adds the GitHub and LinkedIn icons and moves the subtitle to the
+> footer.
+
+* **Add** - added GitHub and LinkedIn icons
+* **Update** - moved the subtitle to the footer
+
+```clojure
+[ilyab "0.3.0"]
+```
+
 ## v0.2.0 / 2017 Nov 13
 
 > This release adds basic email sending. We take the subject and body submitted

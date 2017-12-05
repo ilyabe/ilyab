@@ -7,12 +7,17 @@
     margin-left: 1em;
 }
 
-.social-icons {
-    font-size: 3em;
+.social-color {
     color: #212529;
 }
 
-.fa-github:hover {
+.social-icons {
+    font-size: 3em;
+    color: #212529;
+    margin: 0 20px;
+}
+
+.fa-github:hover, .fa-code-fork:hover {
     color: #868e96;
 }
 
