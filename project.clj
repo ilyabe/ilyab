@@ -1,4 +1,4 @@
-(defproject ilyab "0.3.0"
+(defproject ilyab "0.3.1"
 
   :description "Ilya's home on the web"
   :url "http://ilyab.com"
