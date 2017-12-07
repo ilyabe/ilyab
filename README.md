@@ -41,6 +41,8 @@ git push heroku master
 git push heroku feature-branch:master
 ```
 
+Heroku builds the application and runs the command specified in the `Procfile`.
+
 ## License
 
 Copyright © 2017 Ilya Bernshteyn

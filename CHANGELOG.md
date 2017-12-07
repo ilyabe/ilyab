@@ -1,3 +1,14 @@
+## v0.3.1 / 2017 Dec 7
+
+> This release adds adds a bit of top margin on the footer because it was overalapping
+> the form on mobile.
+
+* **Fix** - fixed the margin on the footer
+
+```clojure
+[ilyab "0.3.1"]
+```
+
 ## v0.3.0 / 2017 Dec 5
 
 > This release adds the GitHub and LinkedIn icons and moves the subtitle to the

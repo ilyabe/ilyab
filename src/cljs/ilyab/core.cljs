@@ -44,7 +44,7 @@
 (defn footer
   "The blurb below my name."
   []
-  [:div.row
+  [:div.row.footer
    [:div.col.text-center
     [:h6.card-subtitle.mb-2.text-muted
      "Website created with "
