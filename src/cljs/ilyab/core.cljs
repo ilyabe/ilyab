@@ -63,11 +63,11 @@
   [:div.row
    [:div.col.text-center
     [:a {:href "https://github.com/ilyabe", :target "_blank"}
-     [:i.fa.fa-github.social-icons {:aria-hidden "true"}]]
+     [:i.fab.fa-github.social-icons.github {:aria-hidden "true"}]]
     [:a {:href "https://www.linkedin.com/in/ilya-bernshteyn-01b2317", :target "_blank"}
-     [:i.fa.fa-linkedin-square.social-icons {:aria-hidden "true"}]]
+     [:i.fab.fa-linkedin.social-icons.linkedin {:aria-hidden "true"}]]
     [:a {:href "https://github.com/ilyabe/ilyab", :target "_blank"}
-     [:i.fa.fa-code-fork.social-icons {:aria-hidden "true"}]]]])
+     [:i.fas.fa-code-branch.social-icons.github {:aria-hidden "true"}]]]])
 
 (defn headshot
   "My main image."
