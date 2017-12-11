@@ -11,13 +11,14 @@
     font-size: 3em;
     color: #212529;
     margin: 0 20px;
+    transition: color 0.2s;
 }
 
-.fa-github:hover, .fa-code-fork:hover {
+.github:hover {
     color: #868e96;
 }
 
-.fa-linkedin-square:hover {
+.linkedin:hover {
     color: #0077B5;
 }
 

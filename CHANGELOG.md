@@ -1,3 +1,15 @@
+## v0.4.0 / 2017 Dec 11
+
+> This release upgrades to Font Awesome 5.
+
+* **Update** - upgraded to Font Awesome v5.0.1
+* **Update** - renamed the FA color styles so that they don't need to change on each upgrade
+* **Update** - added a transition to the icon color change on hover
+
+```clojure
+[ilyab "0.4.0"]
+```
+
 ## v0.3.1 / 2017 Dec 7
 
 > This release adds adds a bit of top margin on the footer because it was overalapping
