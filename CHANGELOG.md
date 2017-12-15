@@ -1,3 +1,15 @@
+## v0.5.0 / 2017 Dec 15
+
+> This release gets contact form working. Submissions are now sent via SES to my
+> email address. There's no front-end validation of the form yet, but this is good
+> enough for now.
+
+* **Update** - email contact form submissions via SES
+
+```clojure
+[ilyab "0.5.0"]
+```
+
 ## v0.4.0 / 2017 Dec 11
 
 > This release upgrades to Font Awesome 5.

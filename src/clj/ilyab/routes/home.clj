@@ -15,12 +15,10 @@
   (GET "/docs" []
        (-> (response/ok (-> "docs/docs.md" io/resource slurp))
            (response/header "Content-Type" "text/plain; charset=utf-8")))
-  ;; TODO spec
   (POST "/v1/contact" {{:keys [subject message]} :params}
-    (infof "Got params: %s %s" subject message)
-    (if (every? empty? [subject message])
-      (response/bad-request "Missing subject or body")
-      (let [res (email/send-msg subject message)]
-        (if (= "OK" (:status res))
-          (response/ok (merge res {:subject subject, :message message}))
-          (response/internal-server-error res))))))
+    (if (and subject message)
+      (let [res (email/send! subject message)]
+        (if (map? res)
+          (response/ok res)
+          (response/internal-server-error res)))
+      (response/bad-request "Missing subject or body"))))

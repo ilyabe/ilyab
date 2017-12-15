@@ -1,4 +1,4 @@
-(defproject ilyab "0.4.0"
+(defproject ilyab "0.5.0"
 
   :description "Ilya's home on the web"
   :url "http://ilyab.com"
@@ -28,13 +28,15 @@
                  [re-frame "0.10.2"]
                  [reagent "0.7.0"]
                  [reagent-utils "0.2.1"]
-                 [ring-webjars "0.2.0"]
+                 [ring-webjars "0.2.0" :exclusions [com.fasterxml.jackson.core/jackson-databind]]
                  [ring/ring-core "1.6.3"]
                  [ring/ring-defaults "0.3.1"]
                  [secretary "1.2.3"]
                  [selmer "1.11.2"]
-                 ;; Internet email library for Clojure
-                 [com.draines/postal "2.0.2"]]
+                 ;; Client lib for the AWS API
+                 [amazonica "0.3.117" :exclusions [com.fasterxml.jackson.core/jackson-core]]
+                 ;; Library for environment variables and settings
+                 [environ "1.1.0"]]
 
   :min-lein-version "2.0.0"
 
