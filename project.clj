@@ -131,11 +131,3 @@
                   }
    :profiles/dev {}
    :profiles/test {}})
-
-;;[ring-webjars "0.2.0"]
-;;    [org.webjars/webjars-locator "0.27"]
-;;        [com.fasterxml.jackson.core/jackson-databind "2.3.3"]
-;;            [com.fasterxml.jackson.core/jackson-annotations "2.3.0"]
-;;        [org.apache.commons/commons-lang3 "3.4"]
-;;        [org.webjars/webjars-locator-core "0.27"]
-;;            [org.apache.commons/commons-compress "1.9"]
