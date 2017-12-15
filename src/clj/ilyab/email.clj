@@ -3,8 +3,7 @@
   (:require [amazonica.aws.simpleemail :as ses]
             [amazonica.core :refer [defcredential]]
             [clojure.tools.logging :refer [error]]
-            [environ.core :refer [env]]
-            [postal.core :refer [send-message]]))
+            [environ.core :refer [env]]))
 
 (def email-key
   "The AWS key for the SES user. Read from the EMAIL_KEY environment variable
