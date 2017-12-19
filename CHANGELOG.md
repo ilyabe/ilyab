@@ -1,3 +1,14 @@
+## v0.6.0 / 2017 Dec 19
+
+> This release changes the "send" button to "sending..." on the contact form while
+> AWS is doing its thing sending the email. This makes the submit feel less choppy.
+
+* **Update** - show "sending..." while the contact form is being handled
+
+```clojure
+[ilyab "0.6.0"]
+```
+
 ## v0.5.0 / 2017 Dec 15
 
 > This release gets contact form working. Submissions are now sent via SES to my

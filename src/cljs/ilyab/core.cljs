@@ -90,9 +90,10 @@
   "The form for submitting a message."
   []
   (let [c (rf/subscribe [:contact])
+        status (:status @c)
         subj (rf/subscribe [:subject])
         msg (rf/subscribe [:message])]
-    (if (= :open (:status @c))
+    (if (or (= :open status) (= :sending status))
       [:form.contact-form {:action "/v1/contact", :method "post"}
        [:div.form-group
         [:label {:for "subject"} "Subject"]
@@ -112,8 +113,9 @@
           :on-change #(rf/dispatch [:msg-change (-> % .-target .-value)])}]]
        [:button.btn.btn-primary
         {:type "button"
-         :on-click #(rf/dispatch [:contact-submit])}
-        "Send"]])))
+         :on-click #(rf/dispatch [:contact-submit])
+         :disabled (= :sending status)}
+        (if (= :open status) "Send" "Sending...")]])))
 
 (defn contact-result
   "The results of submitting the contact form."
