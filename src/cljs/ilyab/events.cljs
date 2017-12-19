@@ -32,7 +32,7 @@
       {:params (select-keys db [:subject :message])
        :handler #(dispatch [:contact-success %1])
        :error-handler #(dispatch [:contact-error %1])})
-    db))
+    (assoc-in db [:contact :status] :sending)))
 
 ;; Handles successful responses from submitting the contact form
 (reg-event-db
