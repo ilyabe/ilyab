@@ -94,7 +94,7 @@
         subj (rf/subscribe [:subject])
         msg (rf/subscribe [:message])]
     (if (or (= :open status) (= :sending status))
-      [:form.contact-form {:action "/v1/contact", :method "post"}
+      [:form#contact-form.contact-form {:class (if (:validated @c) "was-validated"), :noValidate true}
        [:div.form-group
         [:label {:for "subject"} "Subject"]
         [:input#subject.form-control
@@ -102,7 +102,10 @@
           :name "subject"
           :placeholder "Subject"
           :value @subj
-          :on-change #(rf/dispatch [:subj-change (-> % .-target .-value)])}]]
+          :on-change #(rf/dispatch [:subj-change (-> % .-target .-value)])
+          :required true}]
+        [:div.invalid-feedback
+         "C'mon, no subject for me?"]]
        [:div.form-group
         [:label {:for "message"} "Message"]
         [:textarea#message.form-control
@@ -110,7 +113,10 @@
           :name "message"
           :placeholder "Message"
           :value @msg
-          :on-change #(rf/dispatch [:msg-change (-> % .-target .-value)])}]]
+          :on-change #(rf/dispatch [:msg-change (-> % .-target .-value)])
+          :required true}]
+        [:div.invalid-feedback
+         "Cat got your tongue? :-)"]]
        [:button.btn.btn-primary
         {:type "button"
          :on-click #(rf/dispatch [:contact-submit])
