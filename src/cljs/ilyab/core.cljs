@@ -104,8 +104,7 @@
           :value @subj
           :on-change #(rf/dispatch [:subj-change (-> % .-target .-value)])
           :required true}]
-        [:div.invalid-feedback
-         "C'mon, no subject for me?"]]
+        [:div.invalid-feedback "C'mon, no subject for me?"]]
        [:div.form-group
         [:label {:for "message"} "Message"]
         [:textarea#message.form-control
@@ -115,8 +114,7 @@
           :value @msg
           :on-change #(rf/dispatch [:msg-change (-> % .-target .-value)])
           :required true}]
-        [:div.invalid-feedback
-         "Cat got your tongue? :-)"]]
+        [:div.invalid-feedback "Cat got your tongue? :-)"]]
        [:button.btn.btn-primary
         {:type "button"
          :on-click #(rf/dispatch [:contact-submit])
