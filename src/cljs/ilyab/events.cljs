@@ -28,7 +28,7 @@
   :contact-submit
   (fn [db [_ _]] ;; TODO what are these two args _ _?
     (.log js/console (:subject db) (:message db))
-    (if (and (:subject db) (:message db))
+    (if (every? not-empty [(:subject db) (:message db)])
       (do (POST "/v1/contact"
             {:params (select-keys db [:subject :message])
              :handler #(dispatch [:contact-success %1])

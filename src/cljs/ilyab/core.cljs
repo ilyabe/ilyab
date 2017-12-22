@@ -94,7 +94,7 @@
         subj (rf/subscribe [:subject])
         msg (rf/subscribe [:message])]
     (if (or (= :open status) (= :sending status))
-      [:form#contact-form.contact-form {:class (if (:validated @c) "was-validated"), :noValidate true}
+      [:form.contact-form {:class (if (:validated @c) "was-validated"), :noValidate true}
        [:div.form-group
         [:label {:for "subject"} "Subject"]
         [:input#subject.form-control
