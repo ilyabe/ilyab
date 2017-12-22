@@ -28,18 +28,22 @@
   :contact-submit
   (fn [db [_ _]] ;; TODO what are these two args _ _?
     (.log js/console (:subject db) (:message db))
-    (POST "/v1/contact"
-      {:params (select-keys db [:subject :message])
-       :handler #(dispatch [:contact-success %1])
-       :error-handler #(dispatch [:contact-error %1])})
-    (assoc-in db [:contact :status] :sending)))
+    (if (every? not-empty [(:subject db) (:message db)])
+      (do (POST "/v1/contact"
+            {:params (select-keys db [:subject :message])
+             :handler #(dispatch [:contact-success %1])
+             :error-handler #(dispatch [:contact-error %1])})
+          (assoc-in db [:contact :status] :sending))
+      (assoc-in db [:contact :validated] true))))
 
 ;; Handles successful responses from submitting the contact form
 (reg-event-db
   :contact-success
   (fn [db [_ resp]]
     (.log js/console (str "contact-success: " resp))
-    (update db :contact #(assoc % :status :sent :msg "Message sent. Thanks! :-)"))))
+    (update db :contact #(assoc % :status :sent
+                                  :msg "Message sent. Thanks! :-)"
+                                  :validated false))))
 
 ;; Handles successful error responses from submitting the contact form
 (reg-event-db

@@ -1,3 +1,14 @@
+## v0.7.0 / 2017 Dec 22
+
+> This release adds front-end form validation for the contact form. We require
+> both the subject and body and show error feedback when either isn't filled in.
+
+* **Add** - added front-end contact from validation
+
+```clojure
+[ilyab "0.7.0"]
+```
+
 ## v0.6.0 / 2017 Dec 19
 
 > This release changes the "send" button to "sending..." on the contact form while
