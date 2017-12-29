@@ -119,7 +119,9 @@
         {:type "button"
          :on-click #(rf/dispatch [:contact-submit])
          :disabled (= :sending status)}
-        (if (= :open status) "Send" "Sending...")]])))
+        (if (= :open status)
+          "Send"
+          [:span "Sending... " [:i.fas.fa-spinner.fa-spin]])]])))
 
 (defn contact-result
   "The results of submitting the contact form."
