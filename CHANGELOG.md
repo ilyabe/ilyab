@@ -1,3 +1,13 @@
+## v0.8.0 / 2017 Dec 22
+
+> This release adds a spinner icon while the form submit is being processed.
+
+* **Add** - added a spinner icon while the contact form email is being sent
+
+```clojure
+[ilyab "0.7.0"]
+```
+
 ## v0.7.0 / 2017 Dec 22
 
 > This release adds front-end form validation for the contact form. We require
