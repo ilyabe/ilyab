@@ -1,0 +1,115 @@
+/* Colors */
+:root {
+  --navy-blue: #3D5A80;
+  --link-color: #007991;
+  --light-gray: #868e96
+}
+
+/* Minimal CSS Reset */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+.container img {
+  max-width: 25%;
+  height: auto;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+
+/* Rest of the website */
+nav {
+  float: left;
+}
+
+body {
+  background-color: var(--navy-blue);
+  font-family: 'Courier','Open Sans',sans-serif;
+}
+
+header, main, footer {
+  margin: 0 auto;
+  max-width: 960px;
+  background-color: white;
+}
+
+main {
+  padding: 10px 100px 30px 100px;
+}
+
+header {
+  padding: 10px 100px 30px 100px;
+  border-bottom: thin solid;
+}
+
+footer {
+  padding: 10px 100px 10px 100px;
+  border-top: thin solid;
+  color: var(--light-gray);
+  font-size: 0.75em;
+}
+
+a {
+  color: var(--link-color);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Center the content on the main page */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+}
+
+.links a {
+  padding: 0 0.5em 0 0.5em;
+}
+
+/* For mobile */
+@media (max-width: 600px) {
+  main {
+  	max-width: 600px;
+    padding: 0.5em;
+  }
+  h1 {
+    font-size: 1.2em;
+  }
+  .links {
+    flex-direction: column;
+  }
+  .container img {
+    margin-bottom: 0.5em;
+  }
+  header, footer {
+    display: flex;
+    justify-content: center;
+    padding: 0.5em 0 0.5em 0;
+  }
+}
