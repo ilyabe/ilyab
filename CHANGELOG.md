@@ -1,3 +1,6 @@
+## 0.9.1 / 2019 Dec 24
+> Fixed the mobile styles
+
 ## v0.9.0 / 2019 Dec 24
 > Switched the website over to a simple static HTML/CSS site. Figured this
 > is something I can update long-term.
