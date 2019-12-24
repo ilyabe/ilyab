@@ -1,3 +1,7 @@
+## v0.9.0 / 2019 Dec 24
+> Switched the website over to a simple static HTML/CSS site. Figured this
+> is something I can update long-term.
+
 ## v0.8.0 / 2017 Dec 22
 
 > This release adds a spinner icon while the form submit is being processed.
