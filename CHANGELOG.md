@@ -1,3 +1,6 @@
+## 0.10.0 / 2020 Jan 25
+> Styled the site a little more nicely with the help of Bulma CSS.
+
 ## 0.9.1 / 2019 Dec 24
 > Fixed the mobile styles
 
